@@ -26,17 +26,7 @@ jobs:
       run: |
         python update_domains.py
 
-    - name: Commit and push changes
-      run: |
-        git config --global user.email "your-email@example.com"
-        git config --global user.name "Your Name"
-        git add config.json
-        git commit -m "Aggiornamento domini in config.json"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-              # Avvia il deploy su Render utilizzando tutte le variabili segrete
+                      # Avvia il deploy su Render utilizzando tutte le variabili segrete
       - name: Trigger Render Deploy for first URL
         run: |
           curl -X POST ${{ secrets.RENDER_DEPLOY_URL }}
@@ -68,3 +58,13 @@ jobs:
       - name: Trigger Render Deploy for eighth URL
         run: |
           curl -X POST ${{ secrets.RENDER_DEPLOY_URL_8 }}
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.email "your-email@example.com"
+        git config --global user.name "Your Name"
+        git add config.json
+        git commit -m "Aggiornamento domini in config.json"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
