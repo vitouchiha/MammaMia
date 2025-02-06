@@ -23,41 +23,17 @@ jobs:
         pip install requests
 
     - name: Update domains in config.json
+      run: python update_domains.py
+
+    - name: Trigger Render Deploys
+      env:
+        RENDER_DEPLOY_URLS: "${{ secrets.RENDER_DEPLOY_URL }} ${{ secrets.RENDER_DEPLOY_URL_2 }} ${{ secrets.RENDER_DEPLOY_URL_3 }} ${{ secrets.RENDER_DEPLOY_URL_4 }} ${{ secrets.RENDER_DEPLOY_URL_5 }} ${{ secrets.RENDER_DEPLOY_URL_6 }} ${{ secrets.RENDER_DEPLOY_URL_7 }} ${{ secrets.RENDER_DEPLOY_URL_8 }}"
       run: |
-        python update_domains.py
-
-                      # Avvia il deploy su Render utilizzando tutte le variabili segrete
-      - name: Trigger Render Deploy for first URL
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_URL }}
-
-      - name: Trigger Render Deploy for second URL
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_URL_2 }}
-
-      - name: Trigger Render Deploy for third URL
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_URL_3 }}
-
-      - name: Trigger Render Deploy for fourth URL
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_URL_4 }}
-
-      - name: Trigger Render Deploy for fifth URL
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_URL_5 }}
-
-      - name: Trigger Render Deploy for sixth URL
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_URL_6 }}
-
-      - name: Trigger Render Deploy for seventh URL
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_URL_7 }}
-
-      - name: Trigger Render Deploy for eighth URL
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_URL_8 }}
+        for url in $RENDER_DEPLOY_URLS; do
+          if [ -n "$url" ]; then
+            curl -X POST "$url"
+          fi
+        done
 
     - name: Commit and push changes
       run: |
