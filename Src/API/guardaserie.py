@@ -129,4 +129,8 @@ async def test_script():
 
 if __name__ == "__main__":
     import asyncio
+<<<<<<< HEAD
     asyncio.run(test_script())
+=======
+    asyncio.run(test_script())
+>>>>>>> upstream/main
