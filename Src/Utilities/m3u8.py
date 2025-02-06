@@ -120,8 +120,4 @@ async def get_key():
         response.status_code,
         response_headers
     )
-<<<<<<< HEAD
 #r"https://sc-b1-([0-2][0-9]|30).scws-content.net", "https://sc-u9-01.scws-content.net", m3u8_content)
-=======
-#r"https://sc-b1-([0-2][0-9]|30).scws-content.net", "https://sc-u9-01.scws-content.net", m3u8_content)
->>>>>>> upstream/main
