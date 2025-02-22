@@ -20,17 +20,20 @@ def get_domains(pastebin_url):
 
 def extract_full_domain(domain):
     """
-    Estrae il dominio completo da un URL.
+    Estrae il dominio completo da un URL con https:// e www.
     :param domain: Dominio da analizzare.
-    :return: Dominio completo.
+    :return: Dominio completo con schema e www.
     """
     parsed_url = urlparse(domain)
+    scheme = parsed_url.scheme if parsed_url.scheme else 'https'
     netloc = parsed_url.netloc or parsed_url.path
-    return netloc
+    if not netloc.startswith('www.'):
+        netloc = 'www.' + netloc
+    return f"{scheme}://{netloc}"
 
 def check_redirect(domain):
     """
-    Verifica se un dominio fa un redirect e restituisce il dominio finale completo.
+    Verifica se un dominio fa un redirect e restituisce il dominio finale completo con https:// e www.
     :param domain: Dominio da verificare.
     :return: Tuple con l'URL originale e il dominio finale completo.
     """
