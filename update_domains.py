@@ -11,9 +11,8 @@ def get_domains(pastebin_url):
     try:
         response = requests.get(pastebin_url)
         response.raise_for_status()
-        # Estrai i domini dalla risposta e rimuovi eventuali caratteri di ritorno a capo
         domains = response.text.strip().split('\n')
-        domains = [domain.strip().replace('\r', '') for domain in domains]  # Rimuove i caratteri \r
+        domains = [domain.strip().replace('\r', '') for domain in domains]
         return domains
     except requests.RequestException as e:
         print(f"Errore durante il recupero dei domini: {e}")
@@ -26,7 +25,7 @@ def extract_full_domain(domain):
     :return: Dominio completo.
     """
     parsed_url = urlparse(domain)
-    netloc = parsed_url.netloc or parsed_url.path  # Gestisce l'assenza del protocollo
+    netloc = parsed_url.netloc or parsed_url.path
     return netloc
 
 def check_redirect(domain):
@@ -41,7 +40,7 @@ def check_redirect(domain):
     try:
         response = requests.get(domain, allow_redirects=True)
         final_url = response.url
-        final_domain = extract_full_domain(final_url)  # Estrae il dominio completo
+        final_domain = extract_full_domain(final_url)
         return domain, final_domain
     except requests.RequestException as e:
         return domain, f"Error: {str(e)}"
@@ -60,11 +59,9 @@ def update_json_file():
         print("Errore: Il file config.json non è un JSON valido.")
         return
 
-    # Ottieni i domini per StreamingCommunity da un Pastebin specifico
     streamingcommunity_url = 'https://pastebin.com/raw/KgQ4jTy6'
     streamingcommunity_domains = get_domains(streamingcommunity_url)
 
-    # Ottieni i domini per gli altri siti dal Pastebin generale
     general_pastebin_url = 'https://pastebin.com/raw/E8WAhekV'
     general_domains = get_domains(general_pastebin_url)
 
@@ -72,7 +69,6 @@ def update_json_file():
         print("Lista dei domini vuota. Controlla i link di Pastebin.")
         return
 
-    # Mappatura dei siti da aggiornare
     site_mapping = {
         'StreamingCommunity': streamingcommunity_domains[0],
         'Filmpertutti': general_domains[1],
@@ -88,17 +84,15 @@ def update_json_file():
         'DaddyLiveHD': general_domains[11],
     }
 
-    # Aggiorna il file JSON con gli URL finali (post-redirect)
     for site_key, domain_url in site_mapping.items():
         if site_key in data['Siti']:
             original, final_domain = check_redirect(domain_url)
             if "Error" in final_domain:
                 print(f"Errore nel redirect di {original}: {final_domain}")
                 continue
-            data['Siti'][site_key]['domain'] = final_domain
+            data['Siti'][site_key]['url'] = final_domain
             print(f"Aggiornato {site_key}: {final_domain}")
 
-    # Scrivi il file JSON aggiornato
     try:
         with open('config.json', 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
