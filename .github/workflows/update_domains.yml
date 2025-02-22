@@ -35,3 +35,36 @@ jobs:
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # Avvia il deploy su Render utilizzando tutte le variabili segrete
+    - name: Trigger Render Deploy for first URL
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_URL }}
+
+    - name: Trigger Render Deploy for second URL
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_URL_2 }}
+
+    - name: Trigger Render Deploy for third URL
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_URL_3 }}
+
+    - name: Trigger Render Deploy for fourth URL
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_URL_4 }}
+
+    - name: Trigger Render Deploy for fifth URL
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_URL_5 }}
+
+    - name: Trigger Render Deploy for sixth URL
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_URL_6 }}
+
+    - name: Trigger Render Deploy for seventh URL
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_URL_7 }}
+
+    - name: Trigger Render Deploy for eighth URL
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_URL_8 }}
