@@ -1,7 +1,7 @@
 {
     "Siti": {
         "StreamingCommunity": {
-            "url": "https://www.streamingcommunity.lu",
+            "url": "https://streamingcommunity.lu",
             "SC_ForwardProxy": "0",
             "SC_PROXY": "0",
             "VX_ForwardProxy": "0",
@@ -9,7 +9,7 @@
             "enabled": "1"
         },
         "Filmpertutti": {
-            "url": "https://www.filmpertutti.motorcycles",
+            "url": "https://filmpertutti.motorcycles",
             "enabled": "1"
         },
         "Tantifilm": {
@@ -22,7 +22,7 @@
             "enabled": "0"
         },
         "LordChannel": {
-            "url": "https://www.lordchannel.net",
+            "url": "https://lordchannel.net",
             "enabled": "1"
         },
         "StreamingWatch": {
@@ -30,7 +30,7 @@
             "enabled": "1"
         },
         "CB01": {
-            "url": "https://www.cb01new.loan",
+            "url": "https://cb01new.loan",
             "CB_PROXY": "0",
             "CB_ForwardProxy": "0",
             "MX_ForwardProxy": "0",
@@ -38,7 +38,7 @@
             "enabled": "1"
         },
         "DDLStream": {
-            "url": "https://www.ddlstreamitaly.co",
+            "url": "https://ddlstreamitaly.co",
             "cookies": {
                 "ips4_device_key": null,
                 "ips4_IPSSessionFront": null,
@@ -48,13 +48,13 @@
             "enabled": "1"
         },
         "Guardaserie": {
-            "url": "https://www.guardaserietv.mom",
+            "url": "https://guardaserietv.mom",
             "enabled": "1",
             "GS_ForwardProxy": "0",
             "GS_PROXY": "0"
         },
         "GuardaHD": {
-            "url": "https://www.guardahd.stream",
+            "url": "https://guardahd.stream",
             "enabled": "1",
             "GH_ForwardProxy": "0",
             "GH_PROXY": "0"
@@ -72,11 +72,11 @@
             "AW_PROXY": "0"
         },
         "SkyStreaming": {
-            "url": "https://www.skystreaming.cam",
+            "url": "https://skystreaming.cam",
             "enabled": "1"
         },
         "DaddyLiveHD": {
-            "url": "https://www.daddylive.mp",
+            "url": "https://daddylive.mp",
             "enabled": "1"
         }
     },
