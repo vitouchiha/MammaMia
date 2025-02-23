@@ -18,23 +18,30 @@ def get_domains(pastebin_url):
         print(f"Errore durante il recupero dei domini: {e}")
         return []
 
-def extract_full_domain(domain):
+def extract_full_domain(domain, site_key):
     """
-    Estrae il dominio completo da un URL con https:// e www.
+    Estrae il dominio completo da un URL con https:// e www. per Tantifilm e StreamingWatch,
+    mentre per gli altri solo con https://.
     :param domain: Dominio da analizzare.
-    :return: Dominio completo con schema e www.
+    :param site_key: Nome del sito per decidere il prefisso.
+    :return: Dominio completo con schema e www. se richiesto.
     """
     parsed_url = urlparse(domain)
     scheme = parsed_url.scheme if parsed_url.scheme else 'https'
     netloc = parsed_url.netloc or parsed_url.path
-    if not netloc.startswith('www.'):
-        netloc = 'www.' + netloc
-    return f"{scheme}://{netloc}"
 
-def check_redirect(domain):
+    if site_key in ['Tantifilm', 'StreamingWatch']:
+        if not netloc.startswith('www.'):
+            netloc = 'www.' + netloc
+        return f"https://{netloc}"
+    else:
+        return f"https://{netloc}"
+
+def check_redirect(domain, site_key):
     """
     Verifica se un dominio fa un redirect e restituisce il dominio finale completo con https:// e www.
     :param domain: Dominio da verificare.
+    :param site_key: Nome del sito per decidere il prefisso.
     :return: Tuple con l'URL originale e il dominio finale completo.
     """
     if not domain.startswith(('http://', 'https://')):
@@ -43,7 +50,7 @@ def check_redirect(domain):
     try:
         response = requests.get(domain, allow_redirects=True)
         final_url = response.url
-        final_domain = extract_full_domain(final_url)
+        final_domain = extract_full_domain(final_url, site_key)
         return domain, final_domain
     except requests.RequestException as e:
         return domain, f"Error: {str(e)}"
@@ -89,7 +96,7 @@ def update_json_file():
 
     for site_key, domain_url in site_mapping.items():
         if site_key in data['Siti']:
-            original, final_domain = check_redirect(domain_url)
+            original, final_domain = check_redirect(domain_url, site_key)
             if "Error" in final_domain:
                 print(f"Errore nel redirect di {original}: {final_domain}")
                 continue
