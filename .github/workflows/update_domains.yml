@@ -68,3 +68,7 @@ jobs:
     - name: Trigger Render Deploy for eighth URL
       run: |
         curl -X POST ${{ secrets.RENDER_DEPLOY_URL_8 }}
+        
+    - name: Trigger Render Deploy for eighth URL
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_URL_9 }}
