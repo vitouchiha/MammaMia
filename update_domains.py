@@ -18,7 +18,7 @@ from urllib.parse import urlparse
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- CONFIGURAZIONE ---
-REMOTE_RAW_URL = "https://raw.githubusercontent.com/UrloMythus/MammaMia/main/config.json"
+REMOTE_RAW_URL = "https://raw.githubusercontent.com/AstraeLabs/Domains/main/domains.json"
 LOCAL_CONFIG_PATH = Path("config.json")
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; DomainMerger/1.0)"}
 REQUEST_TIMEOUT = 12
